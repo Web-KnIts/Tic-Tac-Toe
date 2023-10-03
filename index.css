@@ -1,0 +1,161 @@
+:root{
+    --cell-size:100px;
+    --corss-zero-size:calc(var(--cell-size)*.9);
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.board{
+    /* top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%); */
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: repeat(3,auto);
+}
+h1{
+    text-align: center;
+}
+.cell{
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Methods for selecting child of parent Container  */
+
+.cell:first-child,  
+.cell:nth-child(2),
+.cell:nth-child(3)
+{
+    border-top: none;
+}
+.cell:first-child,
+.cell:nth-child(4),
+.cell:nth-child(7)
+{
+    border-left: none;
+}
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9)
+{
+    border-right: none;
+}
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9)
+{
+    border-bottom: none;
+}
+.cell.x::before,
+.cell.x::after{
+    background-color: black;
+}
+.cell.circle::before{
+    background-color: black;
+}
+.cell.x,
+.cell.circle{
+    cursor: not-allowed;
+}
+
+/* before after are used after rendering of element*/
+
+/* Cross Design*/
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover:before,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    content: "";
+    position: absolute;
+    width: calc(var(--corss-zero-size)*.18);
+    height: var(--corss-zero-size);
+    background-color: black;
+}
+.cell.x::before,.board.x .cell:not(.x):not(.circle):hover::before{
+    transform: rotate(45deg);
+}
+.cell.cell.x::after,.board.x .cell:not(.x):not(.circle):hover::after{
+    transform: rotate(-45deg);
+}
+
+/* Zero Design*/
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after
+{
+    content: "";
+    border-radius:50%;
+    position: absolute;
+    background-color: black; 
+}
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    width: var(--corss-zero-size);
+    height: var(--corss-zero-size);
+}
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after
+{
+    width: calc(var(--corss-zero-size)*.7);
+    height: calc(var(--corss-zero-size)*.7);
+    background-color: white;
+}
+
+/* Hover Effect*/
+
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before
+{
+    background-color: lightgrey;
+}
+.res-screen{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-color: rgba(0, 0 , 0, .9);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 4vw;
+    display: none;
+}
+#restartBtn{
+    font-size: 3vw;
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
+    padding: 20px;
+}
+#restartBtn:hover{
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    transition: 1s ease;
+}
+.res-screen.show{
+    display: flex;
+}

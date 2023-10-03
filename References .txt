@@ -1,0 +1,32 @@
+From Yt : https://www.youtube.com/watch?v=Y-GkMjUZsmM
+
+Circle Design :-
+
+.cell.x::before,.cell.x::after{
+    content: "";
+    position: absolute;
+    width: calc(var(--corss-zero-size)*.18);
+    height: var(--corss-zero-size);
+    background-color: black;
+}
+.cell.x::before{
+    transform: rotate(45deg);
+}
+.cell.cell.x::after{
+    transform: rotate(-45deg);
+}
+
+Zero Design :-
+
+.cell.circle::before,.cell.circle::after{
+    content: "";
+    border-radius:50%;
+    position: absolute;
+    background-color: black;
+}
+.cell.circle::before{
+    width: var(--corss-zero-size);
+    height: var(--corss-zero-size);
+}
+
+Script Copied from above link
